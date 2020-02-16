@@ -1,0 +1,8 @@
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\bin\Debug\netstandard2.0\ItunesSearchData.deps.json
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\bin\Debug\netstandard2.0\ItunesSearchData.dll
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\obj\Debug\netstandard2.0\ItunesSearchData.AssemblyInfoInputs.cache
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\obj\Debug\netstandard2.0\ItunesSearchData.AssemblyInfo.cs
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\bin\Debug\netstandard2.0\ItunesSearchData.pdb
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\obj\Debug\netstandard2.0\ItunesSearchData.dll
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\obj\Debug\netstandard2.0\ItunesSearchData.pdb
+C:\Users\haviajoe\Desktop\ItunesSearch\BackEnd\ItunesSearchServerWeb\ItunesSearchData\obj\Debug\netstandard2.0\ItunesSearchData.csprojAssemblyReference.cache
