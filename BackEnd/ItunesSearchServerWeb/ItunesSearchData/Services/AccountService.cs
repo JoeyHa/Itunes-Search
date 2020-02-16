@@ -1,14 +1,9 @@
 ﻿using ItunesSearchData.Helpers;
 using ItunesSearchData.Models;
 using ItunesSearchServerApp.Controllers;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
+using System.Web.Mvc;
 
 namespace ItunesSearchData.Services
 {
@@ -17,16 +12,11 @@ namespace ItunesSearchData.Services
         private readonly ItunesSearchContext _context;
         private readonly AppSettings _appSettings;
 
-        public AccountService(IOptions<AppSettings> appSettings, ItunesSearchContext context)
+        public AccountService(ItunesSearchContext context)
         {
             _context = context;
-            _appSettings = appSettings.Value;
         }
-        public IEnumerable<Account> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
+        [HttpGet]
         public Account Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -37,24 +27,34 @@ namespace ItunesSearchData.Services
             {
                 return null;
             }
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
 
-            // remove password before returning
-            user.Password = null;
             return user;
+        }
+        public Account Register(Account user, string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+                throw new MissingFieldException("Password is required");
 
+            if (_context.Accounts.Any(x => x.UserName == user.UserName))
+                throw new Exception("Username '" + user.UserName + "' is already taken");
+
+            //byte[] passwordHash, passwordSalt;
+            //CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            //user.PasswordHash = passwordHash;
+            //user.PasswordSalt = passwordSalt;
+
+            _context.Accounts.Add(user);
+            _context.SaveChanges();
+            return user;
+        }
+        public Account GetById(int id)
+        {
+            return _context.Accounts.Find(id);
+        }
+        public Account GetByUsername(string username)
+        {
+            return _context.Accounts.Where(x => x.UserName == username).FirstOrDefault();
         }
     }
 }

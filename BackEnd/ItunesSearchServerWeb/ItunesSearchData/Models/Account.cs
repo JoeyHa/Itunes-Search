@@ -8,20 +8,18 @@ namespace ItunesSearchData.Models
 {
     public class Account
     {
+        [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(20)]
+        [MaxLength(10)]
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
-        [MaxLength(50)]
-        [Column(TypeName = "varchar(50)")]
-        public string Email { get; set; }
-        [MaxLength(30)]
-        [Column(TypeName = "varchar(30)")]
-        public string Name { get; set; }
-        public string Token { get; set; }
-        [Timestamp]
-        public byte[] CreatedOn { get; set; }
+        [MaxLength(20)]
+        public string FirstName { get; set; }
+        [MaxLength(20)]
+        public string LastName { get; set; }
+
+
     }
 }

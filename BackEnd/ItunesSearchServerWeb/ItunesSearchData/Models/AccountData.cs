@@ -10,9 +10,7 @@ namespace ItunesSearchData.Models
         [Key]
         public int Id { get; set; }
         public int User_Id { get; set; }
-
         public string SearchValue { get; set; }
 
-        public DateTime SearchTime { get; set; }
     }
 }

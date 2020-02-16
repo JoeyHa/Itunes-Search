@@ -1,18 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import registerServiceWorker from './serviceWorker';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-const rootElement = document.getElementById('root');
+import { store } from './components/Auth/Helpers/store';
+import { App }  from './App';
+// import { BrowserRouter } from 'react-router-dom';
+// import registerServiceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
+// const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+//const rootElement = document.getElementById('app');
+
+render (
+  <Provider store={store}>
     <App />
-  </BrowserRouter>,
-  rootElement);
-
-registerServiceWorker();
+  </Provider>,
+  document.getElementById('app')
+);
+// registerServiceWorker();
 

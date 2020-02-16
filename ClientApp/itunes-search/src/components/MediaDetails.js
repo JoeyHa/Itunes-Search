@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import ReactPlayer from 'react-player'
-import { Media } from 'reactstrap'
+import { Media,Button } from 'reactstrap'
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 
 export default class extends Component {
   state = {
+    loading: true,
     track: {}
   }
 
@@ -13,7 +16,7 @@ export default class extends Component {
 
     fetch(`https://localhost:44383/search/Lookup/${id}`)
       .then(res => res.json())
-      .then(json => this.setState({ track: json.detailsRes[0] }))
+      .then(json => this.setState({ track: json.detailsRes[0],loading: false }))
   }
 
   goBack = () => {
@@ -32,15 +35,21 @@ export default class extends Component {
 
     return (
       <Fragment>
+        <ClipLoader
+                size={400}
+                color={"#123abc"}
+                loading={this.state.loading}
+        />
         <h1>{trackName}</h1>
         <Media object src={artworkUrl100} alt={trackName} />
         <hr />
-        <h2>Artist: {artistName}</h2> <br />
-        <h2>Track Name: {trackName}</h2> <br />
-        <h2>Price: {trackPrice} {currency}</h2> <br />
-        
-        <ReactPlayer controls url={previewUrl} />
-        <button onClick={this.goBack}>Go Back</button>
+        <h2> <u><b>Artist:</b></u> {artistName}</h2>
+        <h2> <u><b>Track Name:</b></u> {trackName}</h2> 
+        <h2> <u><b>Price:</b></u> {trackPrice} {currency}</h2> 
+        <h3>Play Demo:</h3>
+        <ReactPlayer controls url={previewUrl} /> 
+        <hr />
+        <Button color="primary" onClick={this.goBack}>Go Back</Button>
       </Fragment>
     )
   }

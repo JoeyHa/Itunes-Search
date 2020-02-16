@@ -1,4 +1,5 @@
 using ItunesSearchData;
+using ItunesSearchData.Helpers;
 using ItunesSearchData.Services;
 using ItunesSearchServerApp.Controllers;
 using Microsoft.AspNetCore.Builder;
@@ -27,29 +28,10 @@ namespace ItunesSearchServerApp
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
                 );
             services.AddControllersWithViews();
+            services.Configure<AppSettings>(options => Configuration.GetSection("AppSettings").Bind(options));
             services.AddTransient<IAccountService, AccountService>();
             services.AddHttpClient<ISearchService, SearchService>();
             services.AddCors();
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(myAllowSpecificOrigins,
-            //    builder =>
-            //    {
-            //        builder.WithOrigins("http://localhost:3000")
-            //                .AllowAnyHeader()
-            //                .AllowAnyMethod()
-            //                .AllowAnyOrigin();
-
-            //    });
-            //});
-
-
-
-            //services.AddSpaStaticFiles(configuration =>
-            //{
-            //    configuration.RootPath = "ClientApp/build";
-            //});
-
             services.AddControllers();
         }
 
